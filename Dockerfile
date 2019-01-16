@@ -19,4 +19,4 @@ EXPOSE 80
 ENV NAME World
 
 # Run app.py when the container launches
-CMD ["python", "weasyprint-app.py"]
+CMD ["python", "application.py"]
