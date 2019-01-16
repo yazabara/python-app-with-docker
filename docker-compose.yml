@@ -7,7 +7,7 @@ services:
       context: ./
       dockerfile: Dockerfile
     restart: always
-    container_name: ontology-service
+    container_name: web-service
     deploy:
       replicas: 5
       resources:
@@ -20,5 +20,18 @@ services:
       - "4000:80"
     networks:
       - webnet
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - "/home/docker/data:/data"
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+    command: redis-server --appendonly yes
+    networks:
+      - webnet
+
 networks:
   webnet:
